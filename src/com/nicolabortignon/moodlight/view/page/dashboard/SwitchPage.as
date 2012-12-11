@@ -1,12 +1,14 @@
 package com.nicolabortignon.moodlight.view.page.dashboard
 {
 	import com.nicolabortignon.moodlight.Facade;
+	import com.nicolabortignon.moodlight.controller.DeviceProperties;
 	import com.nicolabortignon.moodlight.view.page.Page;
 	import com.nicolabortignon.moodlight.view.page.dashboard.switcher.Switcher;
 	
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
 	
 	public class SwitchPage extends Page
 	{
@@ -25,11 +27,13 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 		private const NORMAL_STATE:int = 0;
 		private const DELETE_SWITCH_STATE:int = 1;
 		
+		public var logger:TextField;
+		
 		public function SwitchPage()
 		{
 			super();
 			
-			
+			this.addEventListener(Event.ADDED_TO_STAGE, debugStage);
 			loadSwitchesInformation();
 			renderSwitch();
 			
@@ -39,6 +43,9 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 			
 		}
 		
+		private function debugStage(e:Event):void{
+			//logger.text = DeviceProperties.retriveValues(this.stage);
+		}
 		
 		public function addNewSwitch(e:MouseEvent):void{
 			if(_currentState == NORMAL_STATE){

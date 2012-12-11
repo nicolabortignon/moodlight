@@ -22,10 +22,10 @@
     <qtDefaultName>0</qtDefaultName>
     <rnwkDefaultName>1</rnwkDefaultName>
     <swcDefaultName>0</swcDefaultName>
-    <flashFileName>/Users/Nicola/Developer/MyProject/MoodLight/bin-debug/iOSFla.swf</flashFileName>
+    <flashFileName>/Volumes/Nicola/Developer/MyProject/MoodLight/bin-debug/iOSFla.swf</flashFileName>
     <projectorWinFileName>iOSFla.exe</projectorWinFileName>
     <projectorMacFileName>iOSFla.app</projectorMacFileName>
-    <htmlFileName>/Users/Nicola/Developer/MyProject/MoodLight/bin-debug/iOSFla.html</htmlFileName>
+    <htmlFileName>/Volumes/Nicola/Developer/MyProject/MoodLight/bin-debug/iOSFla.html</htmlFileName>
     <gifFileName>iOSFla.gif</gifFileName>
     <jpegFileName>iOSFla.jpg</jpegFileName>
     <pngFileName>iOSFla.png</pngFileName>
@@ -56,7 +56,7 @@
     <WindowMode>0</WindowMode>
     <DisplayMenu>1</DisplayMenu>
     <DeviceFont>0</DeviceFont>
-    <TemplateFileName>/Users/Nicola/Library/Application Support/Adobe/Flash CS7/it_IT/Configuration/HTML/Default.html</TemplateFileName>
+    <TemplateFileName>/Users/nicolabortignon/Library/Application Support/Adobe/Flash CS6/en_US/Configuration/HTML/Default.html</TemplateFileName>
     <showTagWarnMsg>1</showTagWarnMsg>
   </PublishHtmlProperties>
   <PublishFlashProperties enabled="true">
@@ -116,7 +116,7 @@
         <rsl-url>textLayout_2.0.0.232.swz</rsl-url>
       </library-path-entry>
       <library-path-entry>
-        <swc-path>/Users/Nicola/Developer/MyProject/MoodLight/libs</swc-path>
+        <swc-path>./libs</swc-path>
         <linkage>merge</linkage>
       </library-path-entry>
     </LibraryPath>

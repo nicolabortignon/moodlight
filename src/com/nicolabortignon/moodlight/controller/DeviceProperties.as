@@ -1,5 +1,7 @@
 package com.nicolabortignon.moodlight.controller
 {
+	import flash.display.Stage;
+	import flash.events.Event;
 	import flash.system.Capabilities;
 	
 	public class DeviceProperties
@@ -32,16 +34,18 @@ package com.nicolabortignon.moodlight.controller
 		}
 		
 		
-		public static function retriveValues():void{
+		public static function retriveValues(s:Stage):String{
 			screenHeight = Capabilities.screenResolutionY;
 			screenWidth = Capabilities.screenResolutionX;
 			screenDPI = Capabilities.screenDPI;
 			
-			// TODO:  FOR Testing purpose only
-			screenHeight = 900;
-			screenWidth = 640;
 			
-			trace(screenWidth,screenHeight,screenDPI);
+			// TODO:  FOR Testing purpose only
+		/*	screenHeight = 900;
+			screenWidth = 640;
+			*/
+			trace(""+screenWidth+"("+Capabilities.screenResolutionX+")"+"x"+screenHeight+"("+Capabilities.screenResolutionY+")"+"@"+screenDPI);
+			return ""+screenWidth+"("+Capabilities.screenResolutionX+")"+"x"+screenHeight+"("+Capabilities.screenResolutionY+")"+"@"+screenDPI;
 		}
 	}
 }

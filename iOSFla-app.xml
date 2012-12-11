@@ -2,7 +2,7 @@
 <application xmlns="http://ns.adobe.com/air/application/3.2">
     <id>com.gamevil.zenonia2</id>
     <versionNumber>1.0</versionNumber>
-    <filename>iOSFla</filename>
+    <filename>FinalResizer2</filename>
     <description></description>
     <!-- To localize the description, use the following format for the description element.
 	<description>
@@ -11,7 +11,7 @@
 		<text xml:lang="ja">Japanese App description goes here</text>
 	</description>
 	-->
-    <name>iOSFla</name>
+    <name>FinalResizer2</name>
     <!-- To localize the name, use the following format for the name element.
 	<name>
 		<text xml:lang="en">English App name goes here</text>
@@ -32,9 +32,19 @@
     </initialWindow>
     <customUpdateUI>false</customUpdateUI>
     <allowBrowserInvocation>false</allowBrowserInvocation>
-    <icon></icon>
+    <icon>
+        <image29x29>assets/appicon/Icon-Small.png</image29x29>
+        <image72x72>assets/appicon/Icon-72.png</image72x72>
+        <image57x57>assets/appicon/Icon.png</image57x57>
+        <image114x114>assets/appicon/Icon@2x.png</image114x114>
+        <image512x512>assets/appicon/iTunesArtwork.png</image512x512>
+    </icon>
     <iPhone>
         <requestedDisplayResolution>high</requestedDisplayResolution>
-        <InfoAdditions><![CDATA[<key>UIDeviceFamily</key><array><string>1</string><string>2</string></array>]]></InfoAdditions>
+        <InfoAdditions><![CDATA[<key>UIDeviceFamily</key><array><string>1</string></array>]]></InfoAdditions>
     </iPhone>
+    <android>
+        <manifestAdditions><![CDATA[<manifest></manifest>]]></manifestAdditions>
+    </android>
+    <versionLabel></versionLabel>
 </application>

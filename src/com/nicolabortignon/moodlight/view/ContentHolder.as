@@ -32,10 +32,13 @@ package com.nicolabortignon.moodlight.view
 		public function ContentHolder()
 		{
 			super();	
+			
+			
+		}
+		
+		public function init(){
 			backgroundInitalization();
 			addLoadingPage();   // CREATE THE LOADING PAGE
-			
-			
 			Facade.registerToAnEvent("LoadedComplete",loadingCompleted);
 			
 			loadingPage.updatePercentuage(5,"Initializing Controler");
@@ -46,8 +49,6 @@ package com.nicolabortignon.moodlight.view
 			Facade.dispatchAnEvent("LoadedComplete");
 			// MESSAGE THE CONTENT LOADER WAS INITIALIZED CORRECTLY 
 		}
-		
-		
 		
 		private function loadingCompleted():void{
 			
@@ -97,9 +98,10 @@ package com.nicolabortignon.moodlight.view
 			optionsContent.visible = false;
 			
 			optionsMenuButton.y = dashboardMenuButton.y = liveMenuButton.y = dashboardMenuButton.y = DeviceProperties.screenHeight-menuBackground.height;
-			dashboardMenuButton.x = 2+(DeviceProperties.screenWidth-dashboardMenuButton.width)/2;
+			trace(DeviceProperties.screenHeight-menuBackground.height);
+			dashboardMenuButton.x = 2+( 640-dashboardMenuButton.width)/2;
 			liveMenuButton.x = 1+10;
-			optionsMenuButton.x = -4+DeviceProperties.screenWidth-10-optionsMenuButton.width;
+			optionsMenuButton.x = -4+640-10-optionsMenuButton.width;
 			
 			
 			
@@ -116,15 +118,15 @@ package com.nicolabortignon.moodlight.view
 		private function translateContent(currentPositionId:int,nextPositionId:int):void{
 			trace(currentPositionId,nextPositionId);
 			if(currentPositionId < nextPositionId){
-				contents[nextPositionId].x = DeviceProperties.screenWidth;
+				contents[nextPositionId].x = stage.stageWidth;
 				contents[nextPositionId].visible = true;
-				TweenMax.to(contents[currentPositionId],.5,{x:-DeviceProperties.screenWidth, onComplete:function(){contents[currentPositionId].hide();}});
+				TweenMax.to(contents[currentPositionId],.5,{x:-stage.stageWidth, onComplete:function(){contents[currentPositionId].hide();}});
 				TweenMax.to(contents[nextPositionId],.5,{x:0});
 			}
 			else {
-				contents[nextPositionId].x = -DeviceProperties.screenWidth;
+				contents[nextPositionId].x = -stage.stageWidth;
 				contents[nextPositionId].visible = true;
-				TweenMax.to(contents[currentPositionId],.5,{x:DeviceProperties.screenWidth, onComplete:function(){contents[currentPositionId].hide();}});
+				TweenMax.to(contents[currentPositionId],.5,{x:stage.stageWidth, onComplete:function(){contents[currentPositionId].hide();}});
 				TweenMax.to(contents[nextPositionId],.5,{x:0});
 			}
 		}
@@ -159,9 +161,10 @@ package com.nicolabortignon.moodlight.view
 			backgroundContainer.addChild(backgroundFilled);
 			var myBitmapData:BitmapData = new backgroundTiled();
 			backgroundFilled.graphics.beginBitmapFill(myBitmapData);
-			backgroundFilled.graphics.drawRect(0,0,DeviceProperties.screenWidth,DeviceProperties.screenHeight);
+			backgroundFilled.graphics.drawRect(0,0,stage.stageWidth,DeviceProperties.screenHeight);
 			backgroundFilled.graphics.endFill();
 			menuBackground.y = DeviceProperties.screenHeight - menuBackground.height;
+			trace(">>>>>> ",DeviceProperties.screenHeight,"" + (DeviceProperties.screenHeight - menuBackground.height));
 			menuBackground.x = 0;
 		}
 		

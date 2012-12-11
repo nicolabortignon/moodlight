@@ -150,13 +150,27 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 		}
 		
 		private function warmLightHandler(e:MouseEvent):void{
+			var o:Object = Colours.getHSL(0xfaecce);
+			_currentHue = o.h;
+			_currentLuminance = o.l/100;
+			_currentSaturation = o.s/100;
+			trace(o.h,o.l,o.s);
 			gotoColor(-150,new Point(45,265));
 			
 		}
 		private function pureLightHandler(e:MouseEvent):void{
+			var o:Object = Colours.getHSL(0xffffff);
+			_currentHue = o.h;
+			_currentLuminance = o.l/100;
+			_currentSaturation = o.s/100;
+			
 			gotoColor(168,new Point(8,288));
 		}
 		private function coldLightHandler(e:MouseEvent):void{
+			var o:Object = Colours.getHSL(0xe7f5fb);
+			_currentHue = o.h;
+			_currentLuminance = o.l/100;
+			_currentSaturation = o.s/100;
 			gotoColor(72,new Point(39,268));
 		}
 		
@@ -189,7 +203,7 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 			wheelCursor.y = (centralPoint.y+9)+ distanceFromCenter*Math.sin(angleInRadians);
 			
 			
-			_angle = angle;
+			_angle = angle; 
 			TweenMax.to(triangle.picker, .5,{shortRotation:{rotationZ:angle+15}});
 			TweenMax.to(triangle, .5, {shortRotation:{rotationZ:-angle-15},colorMatrixFilter:{hue:hueAngle}});
 			
