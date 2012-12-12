@@ -44,7 +44,7 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 		}
 		
 		private function debugStage(e:Event):void{
-			//logger.text = DeviceProperties.retriveValues(this.stage);
+			logger.text = "test 2";//DeviceProperties.retriveValues(this.stage);
 		}
 		
 		public function addNewSwitch(e:MouseEvent):void{

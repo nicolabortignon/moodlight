@@ -118,15 +118,15 @@ package com.nicolabortignon.moodlight.view
 		private function translateContent(currentPositionId:int,nextPositionId:int):void{
 			trace(currentPositionId,nextPositionId);
 			if(currentPositionId < nextPositionId){
-				contents[nextPositionId].x = stage.stageWidth;
+				contents[nextPositionId].x = 960;
 				contents[nextPositionId].visible = true;
-				TweenMax.to(contents[currentPositionId],.5,{x:-stage.stageWidth, onComplete:function(){contents[currentPositionId].hide();}});
+				TweenMax.to(contents[currentPositionId],.5,{x:-960, onComplete:function(){contents[currentPositionId].hide();}});
 				TweenMax.to(contents[nextPositionId],.5,{x:0});
 			}
 			else {
-				contents[nextPositionId].x = -stage.stageWidth;
+				contents[nextPositionId].x = -960;
 				contents[nextPositionId].visible = true;
-				TweenMax.to(contents[currentPositionId],.5,{x:stage.stageWidth, onComplete:function(){contents[currentPositionId].hide();}});
+				TweenMax.to(contents[currentPositionId],.5,{x:960, onComplete:function(){contents[currentPositionId].hide();}});
 				TweenMax.to(contents[nextPositionId],.5,{x:0});
 			}
 		}
@@ -161,7 +161,7 @@ package com.nicolabortignon.moodlight.view
 			backgroundContainer.addChild(backgroundFilled);
 			var myBitmapData:BitmapData = new backgroundTiled();
 			backgroundFilled.graphics.beginBitmapFill(myBitmapData);
-			backgroundFilled.graphics.drawRect(0,0,stage.stageWidth,DeviceProperties.screenHeight);
+			backgroundFilled.graphics.drawRect(0,0,960,DeviceProperties.screenHeight);
 			backgroundFilled.graphics.endFill();
 			menuBackground.y = DeviceProperties.screenHeight - menuBackground.height;
 			trace(">>>>>> ",DeviceProperties.screenHeight,"" + (DeviceProperties.screenHeight - menuBackground.height));

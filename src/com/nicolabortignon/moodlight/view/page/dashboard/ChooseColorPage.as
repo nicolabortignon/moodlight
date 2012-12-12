@@ -4,11 +4,13 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 	import com.greensock.easing.*;
 	import com.nicolabortignon.colourlib.Colours;
 	import com.nicolabortignon.moodlight.Facade;
+	import com.nicolabortignon.moodlight.controller.DeviceProperties;
 	import com.nicolabortignon.moodlight.view.page.Page;
 	
 	import fl.motion.Color;
 	
 	import flash.display.MovieClip;
+	import flash.display.Shape;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.filters.ColorMatrixFilter;
@@ -50,6 +52,7 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 		public var _currentSaturation:Number;
 		public var _currentLuminance:Number;
 		
+		var s:Shape = new Shape();
 		public function ChooseColorPage()
 		{
 			super();
@@ -90,7 +93,7 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 			recentColor2.addEventListener(MouseEvent.CLICK, selectRecentColor);
 			recentColor3.addEventListener(MouseEvent.CLICK, selectRecentColor);
 			recentColor4.addEventListener(MouseEvent.CLICK, selectRecentColor);
-			
+			addChild(s);
 		}
 				
 		private function selectRecentColor(e:MouseEvent):void{
@@ -213,6 +216,7 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 		}
 		
 		private function movePicker(e:MouseEvent):void{
+		//	trace(e.target.mouseX,e.target.mouseY);
 			triangle.picker.x = e.target.mouseX-90;
 			triangle.picker.y = e.target.mouseY-150;
 			_coordinates = new Point( e.target.mouseX, e.target.mouseY);
@@ -232,19 +236,26 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 		}
 		private function angleCoordinates(e:MouseEvent):void{
 			
+			s.graphics.clear();
+			s.graphics.beginFill(0xff0000);
+			trace(stage.mouseX,e.target.mouseX,stage.mouseY);
 			var currentCenter:Point = new Point(circleGridMovieClip.x,circleGridMovieClip.y);
-			var centralPoint:Point = new Point(currentCenter.x+circleGridMovieClip.width/2, currentCenter.y + circleGridMovieClip.height/2);
+			var centralPoint:Point = new Point(-20+currentCenter.x+circleGridMovieClip.width/2, currentCenter.y + circleGridMovieClip.height/2);
 			
-			var distanceX = stage.mouseX - centralPoint.x;
-			var distanceY = stage.mouseY - centralPoint.y; 
+			var distanceX = (stage.mouseX/DeviceProperties.alphaRatio) - centralPoint.x;
+			var distanceY = (stage.mouseY/DeviceProperties.alphaRatio) - centralPoint.y; 
+
+			s.graphics.drawCircle(centralPoint.x,centralPoint.y,15);
+			s.graphics.drawCircle(stage.mouseX/DeviceProperties.alphaRatio,stage.mouseY/DeviceProperties.alphaRatio,15);
 			
 			var angleInRadians:Number = Math.atan2(distanceY, distanceX);
 			var angleInDegrees:Number = -angleInRadians * (180 / Math.PI);
+			trace(">>>>>>>>>>>>>>>>>>>>>>",angleInDegrees);
 			//	trace(angleInDegrees,Math.cos(angleInRadians),Math.sin(angleInRadians));
 			
 			wheelCursor.rotation = -angleInDegrees;
 			
-			wheelCursor.x = (centralPoint.x-19) + distanceFromCenter*Math.cos(angleInRadians);
+			wheelCursor.x = (centralPoint.x) + distanceFromCenter*Math.cos(angleInRadians);
 			wheelCursor.y = (centralPoint.y+9)+ distanceFromCenter*Math.sin(angleInRadians);
 			
 			// SHAME ON ME FOR THE FOLLOWING CODE!		

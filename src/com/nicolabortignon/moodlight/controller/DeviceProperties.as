@@ -17,7 +17,7 @@ package com.nicolabortignon.moodlight.controller
 		public static var screenHeight:int;
 		public static var screenWidth:int;
 		public static var screenDPI:int;
-		
+		public static var alphaRatio:Number;
 		public function DeviceProperties()
 		{
 			if(instance)

@@ -73,7 +73,7 @@
     <EventCompress>7</EventCompress>
     <OverrideSounds>0</OverrideSounds>
     <Version>15</Version>
-    <ExternalPlayer>PFI1_0</ExternalPlayer>
+    <ExternalPlayer>android_0</ExternalPlayer>
     <ActionScriptVersion>3</ActionScriptVersion>
     <PackageExportFrame>1</PackageExportFrame>
     <PackagePaths></PackagePaths>

@@ -16,7 +16,7 @@ package com.nicolabortignon.components.touchlist.renderers
 	import flash.filters.DropShadowFilter;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
-	import com.thanksmister.touchlist.events.ListItemEvent;
+	import com.nicolabortignon.components.touchlist.events.ListItemEvent;
 
 	public class TouchListItemRenderer extends Sprite implements ITouchListItemRenderer
 	{
