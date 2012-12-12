@@ -12,6 +12,9 @@ package com.nicolabortignon.moodlight.view.page.dashboard.switcher
 		
 		public var removeSwitch:MovieClip;
 		public var labelTextField:TextField;
+		
+		public var lights:Vector.<Boolean>;
+	
 		public function Switcher()
 		{
 			super();

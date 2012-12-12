@@ -21,5 +21,6 @@ package com.nicolabortignon.components.touchlist.renderers
 		function get itemHeight():Number;
 		function selectItem():void;
 		function unselectItem():void;
+		function get isSelected():Boolean;
 	}
 }

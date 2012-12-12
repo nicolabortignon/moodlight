@@ -36,7 +36,9 @@ package com.nicolabortignon.components.touchlist.renderers
 		public var style:MovieClip;
 
 		//-------- properites -----------
-		
+		public function get isSelected():Boolean{
+			return _isSelected;
+		}
 		public function get itemWidth():Number
 		{
 			return _itemWidth;
