@@ -98,7 +98,6 @@ package com.nicolabortignon.moodlight.view
 			optionsContent.visible = false;
 			
 			optionsMenuButton.y = dashboardMenuButton.y = liveMenuButton.y = dashboardMenuButton.y = DeviceProperties.screenHeight-menuBackground.height;
-			trace(DeviceProperties.screenHeight-menuBackground.height);
 			dashboardMenuButton.x = 2+( 640-dashboardMenuButton.width)/2;
 			liveMenuButton.x = 1+10;
 			optionsMenuButton.x = -4+640-10-optionsMenuButton.width;
@@ -116,24 +115,22 @@ package com.nicolabortignon.moodlight.view
 		
 		
 		private function translateContent(currentPositionId:int,nextPositionId:int):void{
-			trace(currentPositionId,nextPositionId);
 			if(currentPositionId < nextPositionId){
-				contents[nextPositionId].x = 960;
+				contents[nextPositionId].x = 640;
 				contents[nextPositionId].visible = true;
-				TweenMax.to(contents[currentPositionId],.5,{x:-960, onComplete:function(){contents[currentPositionId].hide();}});
+				TweenMax.to(contents[currentPositionId],.5,{x:-640, onComplete:function(){contents[currentPositionId].hide();}});
 				TweenMax.to(contents[nextPositionId],.5,{x:0});
 			}
 			else {
-				contents[nextPositionId].x = -960;
+				contents[nextPositionId].x = -640;
 				contents[nextPositionId].visible = true;
-				TweenMax.to(contents[currentPositionId],.5,{x:960, onComplete:function(){contents[currentPositionId].hide();}});
+				TweenMax.to(contents[currentPositionId],.5,{x:640, onComplete:function(){contents[currentPositionId].hide();}});
 				TweenMax.to(contents[nextPositionId],.5,{x:0});
 			}
 		}
 		private function liveSelected():void{
 			var currentPositionId = currentButtonSelected.id;
 			var nextPositionId = 0;
-			
 			translateContent(currentPositionId,nextPositionId);
 			currentButtonSelected.deselect();
 			currentButtonSelected = contentMenu[nextPositionId];
@@ -142,7 +139,6 @@ package com.nicolabortignon.moodlight.view
 		private function dashboardSelected():void{
 			var currentPositionId = currentButtonSelected.id;
 			var nextPositionId = 1;
-			
 			translateContent(currentPositionId,nextPositionId);
 			currentButtonSelected.deselect();
 			currentButtonSelected = contentMenu[nextPositionId];
@@ -161,10 +157,9 @@ package com.nicolabortignon.moodlight.view
 			backgroundContainer.addChild(backgroundFilled);
 			var myBitmapData:BitmapData = new backgroundTiled();
 			backgroundFilled.graphics.beginBitmapFill(myBitmapData);
-			backgroundFilled.graphics.drawRect(0,0,960,DeviceProperties.screenHeight);
+			backgroundFilled.graphics.drawRect(0,0,640,DeviceProperties.screenHeight);
 			backgroundFilled.graphics.endFill();
 			menuBackground.y = DeviceProperties.screenHeight - menuBackground.height;
-			trace(">>>>>> ",DeviceProperties.screenHeight,"" + (DeviceProperties.screenHeight - menuBackground.height));
 			menuBackground.x = 0;
 		}
 		

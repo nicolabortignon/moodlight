@@ -36,8 +36,8 @@ package
 		
 		private function addView():void{
 	//		DeviceProperties.screenWidth = 768;
-			DeviceProperties.screenWidth = 450;//480;
-			DeviceProperties.screenHeight = 800;
+		//	DeviceProperties.screenWidth = 420;//480;
+	//		DeviceProperties.screenHeight = 780;
 			var defaultRatio:Number = 960/640;
 			var currentDeviceRatio:Number = DeviceProperties.screenHeight/DeviceProperties.screenWidth;
 			// the ratio between the developed ratio and the device ratio

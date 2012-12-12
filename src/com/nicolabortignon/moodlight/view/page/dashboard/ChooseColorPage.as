@@ -69,7 +69,12 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 			hueColorMatrix.Hue = 140;
 			
 			triangle.filters = [hueColorMatrix.Filter];
+			
+			// INITIALIZE TO A COLOR
 			gotoColor(-9,new Point(252,146));
+			_currentHue = 277;
+			_currentSaturation = 1;
+			_currentLuminance = 0.4693;
 			
 			nextButton.addEventListener(MouseEvent.CLICK, nextButtonHandler);
 			backButton.addEventListener(MouseEvent.CLICK, backButtonHandler);
@@ -136,6 +141,7 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 				recentColor1.angle = _angle;
 				recentColor1.coordinates = _coordinates;
 
+				trace(_currentHue,_currentSaturation,_currentLuminance);
 				var oRGB:Object = Colours.hslToRgb({h:_currentHue,s:(_currentSaturation*100),l:(_currentLuminance*100)});
 			
 				recentColor1.drawCircle(Colours.getHex(oRGB.r,oRGB.g,oRGB.b));
@@ -209,10 +215,6 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 			_angle = angle; 
 			TweenMax.to(triangle.picker, .5,{shortRotation:{rotationZ:angle+15}});
 			TweenMax.to(triangle, .5, {shortRotation:{rotationZ:-angle-15},colorMatrixFilter:{hue:hueAngle}});
-			
-			
-			
-			
 		}
 		
 		private function movePicker(e:MouseEvent):void{
@@ -224,7 +226,6 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 			_currentSaturation = e.target.mouseX/255;
 			if(_currentSaturation > 1) _currentSaturation = 1;
 			_currentLuminance = e.target.mouseY/300;
-			trace(_currentSaturation,_currentLuminance);
 			
 			TweenMax.to(triangle.picker, .5, {colorMatrixFilter:{saturation:(e.target.mouseX/255),brightness:0+(e.target.mouseY/100)}});
 		}
@@ -236,21 +237,21 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 		}
 		private function angleCoordinates(e:MouseEvent):void{
 			
-			s.graphics.clear();
-			s.graphics.beginFill(0xff0000);
-			trace(stage.mouseX,e.target.mouseX,stage.mouseY);
+/*			s.graphics.clear();
+			s.graphics.beginFill(0xff0000); */
+
+			
 			var currentCenter:Point = new Point(circleGridMovieClip.x,circleGridMovieClip.y);
 			var centralPoint:Point = new Point(-20+currentCenter.x+circleGridMovieClip.width/2, currentCenter.y + circleGridMovieClip.height/2);
 			
 			var distanceX = (stage.mouseX/DeviceProperties.alphaRatio) - centralPoint.x;
 			var distanceY = (stage.mouseY/DeviceProperties.alphaRatio) - centralPoint.y; 
-
+/*
 			s.graphics.drawCircle(centralPoint.x,centralPoint.y,15);
 			s.graphics.drawCircle(stage.mouseX/DeviceProperties.alphaRatio,stage.mouseY/DeviceProperties.alphaRatio,15);
-			
+		*/	
 			var angleInRadians:Number = Math.atan2(distanceY, distanceX);
 			var angleInDegrees:Number = -angleInRadians * (180 / Math.PI);
-			trace(">>>>>>>>>>>>>>>>>>>>>>",angleInDegrees);
 			//	trace(angleInDegrees,Math.cos(angleInRadians),Math.sin(angleInRadians));
 			
 			wheelCursor.rotation = -angleInDegrees;

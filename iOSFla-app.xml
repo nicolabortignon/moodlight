@@ -2,7 +2,7 @@
 <application xmlns="http://ns.adobe.com/air/application/3.2">
     <id>com.gamevil.zenonia2</id>
     <versionNumber>1.0</versionNumber>
-    <filename>MoodLights</filename>
+    <filename>MoodLight</filename>
     <description></description>
     <!-- To localize the description, use the following format for the description element.
 	<description>
@@ -11,7 +11,7 @@
 		<text xml:lang="ja">Japanese App description goes here</text>
 	</description>
 	-->
-    <name>MoodLights</name>
+    <name>MoodLight</name>
     <!-- To localize the name, use the following format for the name element.
 	<name>
 		<text xml:lang="en">English App name goes here</text>
@@ -35,7 +35,6 @@
     <icon>
         <image72x72>assets/appicon/Icon-72.png</image72x72>
         <image48x48>assets/appicon/android48.png</image48x48>
-        <image36x36>assets/appicon/android36.png</image36x36>
     </icon>
     <iPhone>
         <requestedDisplayResolution>high</requestedDisplayResolution>
@@ -44,5 +43,5 @@
     <android>
         <manifestAdditions><![CDATA[<manifest></manifest>]]></manifestAdditions>
     </android>
-    <versionLabel></versionLabel>
+    <versionLabel>MoodLight</versionLabel>
 </application>

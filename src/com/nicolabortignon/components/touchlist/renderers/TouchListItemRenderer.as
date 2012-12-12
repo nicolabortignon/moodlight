@@ -10,24 +10,30 @@
  * */
 package com.nicolabortignon.components.touchlist.renderers
 {
+	import com.nicolabortignon.components.touchlist.events.ListItemEvent;
+	
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.filters.DropShadowFilter;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
-	import com.nicolabortignon.components.touchlist.events.ListItemEvent;
+	import flash.text.TextFormatAlign;
 
-	public class TouchListItemRenderer extends Sprite implements ITouchListItemRenderer
+	public class TouchListItemRenderer extends MovieClip implements ITouchListItemRenderer
 	{
 		protected var _data:Object;
 		protected var _index:Number = 0;
 		protected var _itemWidth:Number = 0;
-		protected var _itemHeight:Number = 0;
+		public var _itemHeight:Number = 0;
 		
 		protected var initialized:Boolean = false;
 		protected var textField:TextField;
 		protected var shadowFilter:DropShadowFilter;
+		
+		public var _isSelected:Boolean = false;
+		public var style:MovieClip;
 
 		//-------- properites -----------
 		
@@ -87,7 +93,7 @@ package com.nicolabortignon.components.touchlist.renderers
 		public function unselectItem():void
 		{
 			removeEventListener(MouseEvent.MOUSE_UP, selectHandler);
-			draw();
+		//	draw();
 		}
 		
 		/**
@@ -96,18 +102,29 @@ package com.nicolabortignon.components.touchlist.renderers
 		public function selectItem():void
 		{
 			addEventListener(MouseEvent.MOUSE_UP, selectHandler);
+			var textFormat:TextFormat = new TextFormat();
+			if(_isSelected){
+				textFormat.size = 34;
+				textFormat.color = 0x323232;
+				style.gotoAndStop(1);
+				_isSelected = false;
+				textField.y = -12+itemHeight/2 - textField.textHeight/2;
+				
+				
+			} else {
+				textFormat.size = 30;
+				textFormat.color = 0xdedede;
+				style.gotoAndStop(2);	
+				textField.y = -7+itemHeight/2 - textField.textHeight/2;
+				
+				
+				_isSelected = true;
+			}
+			textFormat.font = "Miso"; 
 			
-			this.graphics.clear();
-			
-			this.graphics.beginFill(0xCC6600, .9);
-			this.graphics.drawRect(0, 0, itemWidth, itemHeight);
-			this.graphics.endFill();
-			
-			this.graphics.beginFill(0xEAEAEA, .5);
-			this.graphics.drawRect(0, _itemHeight - 1, itemWidth, .5);
-			this.graphics.endFill();
-			
-			this.filters = [shadowFilter];
+	
+			textField.defaultTextFormat = textFormat;
+			textField.text = textField.text.toString();
 		}
 		
 		//-------- protected methods -----------
@@ -118,14 +135,20 @@ package com.nicolabortignon.components.touchlist.renderers
 		 * */
 		protected function createChildren():void
 		{
+			style = new listItemButton();
+			addChild(style);
+			
 			if(!textField) {
 				var textFormat:TextFormat = new TextFormat();
-					textFormat.color = 0xEAEAEA;
-					textFormat.size = 24;
-					textFormat.font = "DroidSans"; 
-	
+					textFormat.color = 0x323232;
+					textFormat.size = 34;
+					textFormat.font = "Miso"; 
+					textFormat.align = TextFormatAlign.CENTER;
 				textField = new TextField();
-				textField.height = 22;
+				textField.height = 34;
+				textField.width = style.width;
+				
+				
 				textField.mouseEnabled = false;
 				textField.defaultTextFormat = textFormat;
 				
@@ -136,28 +159,25 @@ package com.nicolabortignon.components.touchlist.renderers
 			
 			draw();
 			
-			shadowFilter = new DropShadowFilter(3, 90, 0x000000, .6, 8, 8, 1, 2, true);
 		}
 		
 		protected function draw():void
 		{
 			if(!initialized) return 
-				
-			textField.x = 5;
-			textField.text = String(data);
+			style.gotoAndStop(1);
+			var textFormat:TextFormat = new TextFormat();
+			textFormat.color = 0x323232;
+			textFormat.size = 34;
+			textFormat.font = "Miso"; 
+			textFormat.align = TextFormatAlign.CENTER;
+			textField.defaultTextFormat = textFormat;
+			
+			textField.text = String(data).toUpperCase();
 			textField.height = textField.textHeight;
 			textField.width = itemWidth - 10;
-			textField.y = itemHeight/2 - textField.textHeight/2;
+			textField.y = -12+itemHeight/2 - textField.textHeight/2;
 			
-			this.graphics.clear();
 			
-			this.graphics.beginFill(0x000000, 1);
-			this.graphics.drawRect(0, 0, itemWidth, itemHeight);
-			this.graphics.endFill();
-			
-			this.graphics.beginFill(0xEAEAEA, .5);
-			this.graphics.drawRect(0, itemHeight - 1, itemWidth, .5);
-			this.graphics.endFill();
 			
 			this.filters = [];
 		}
@@ -172,16 +192,7 @@ package com.nicolabortignon.components.touchlist.renderers
 			removeEventListener(Event.REMOVED_FROM_STAGE, destroy);
 			removeEventListener(MouseEvent.MOUSE_UP, selectHandler);
 			
-			this.removeChild(textField);
-			
-			this.graphics.clear();
-			this.filters = [];
-			
-			textField = null;
-			shadowFilter = null;
-			_data = null;
-			
-			initialized = false;
+		
 		}
 		
 		// ----- event handlers --------

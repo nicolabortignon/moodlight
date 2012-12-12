@@ -7,6 +7,7 @@ package com.nicolabortignon.moodlight.view.content.dashboard
 	import com.nicolabortignon.moodlight.view.content.Content;
 	import com.nicolabortignon.moodlight.view.page.Page;
 	import com.nicolabortignon.moodlight.view.page.dashboard.ChooseColorPage;
+	import com.nicolabortignon.moodlight.view.page.dashboard.ChooseLightPage;
 	import com.nicolabortignon.moodlight.view.page.dashboard.SwitchPage;
 	import com.nicolabortignon.moodlight.view.page.dashboard.switcher.Switcher;
 	
@@ -15,8 +16,10 @@ package com.nicolabortignon.moodlight.view.content.dashboard
 	public class DashboardContent extends Content
 	{
 		private var switchPage:SwitchPage;
+		private var chooseLightPage:ChooseLightPage;
 		private var colourPage:ChooseColorPage;
 		private var contents:Vector.<Page>;
+	
 		public function DashboardContent()
 		{
 			super();
@@ -27,50 +30,54 @@ package com.nicolabortignon.moodlight.view.content.dashboard
 		}
 		
 		public function registerEvents():void{
-			Facade.registerToAnEvent("BACK_FROM_COLOR_PAGE",moveBackFromColorPage);
 			Facade.registerToAnEvent("AddNewSwitch",addNewSwitchHandler);
+			
+			Facade.registerToAnEvent("NEXT_FROM_LIGHT_LIST_PAGE",chooseColorHandler);
+			Facade.registerToAnEvent("BACK_FROM_LIGHT_LIST_PAGE",moveBackFromLightListPage);
+
+			Facade.registerToAnEvent("BACK_FROM_COLOR_PAGE",moveBackFromColorPage);
 		}
 		
-		public function addNewSwitchHandler():void{
-			
-			TweenMax.to(switchPage,.7,{x:-DeviceProperties.screenWidth, onComplete: switchPage.hide});
-			
-			
-			// GO TO COLOUR PAGE
-			colourPage.x = DeviceProperties.screenWidth;
-			colourPage.visible = true;
-			TweenMax.to(colourPage,.7,{x:0});
-			
-			
-		}
+		public function addNewSwitchHandler():void{	translateContent(0,1); }
+		private function moveBackFromLightListPage():void{ translateContent(1,0)};
+		
+		public function chooseColorHandler(){translateContent(1,2);}
+		private function moveBackFromColorPage():void{ translateContent(2,1)};
+		
+		
 		
 		public function render():void{
 			switchPage = new SwitchPage()
 			colourPage = new ChooseColorPage();
+			chooseLightPage = new ChooseLightPage();
+			
 			
 			
 			colourPage.visible = false;
+			chooseLightPage.visible = false;
+			
 			contents.push(switchPage);
+			contents.push(chooseLightPage);
 			contents.push(colourPage);
 			
 			addChild(colourPage);
+			addChild(chooseLightPage);
 			addChild(switchPage);
 			
 			
 		}
-		private function moveBackFromColorPage():void{ translateContent(1,0)};
 		private function translateContent(currentPositionId:int,nextPositionId:int):void{
 			trace(currentPositionId,nextPositionId);
 			if(currentPositionId < nextPositionId){
-				contents[nextPositionId].x = DeviceProperties.screenWidth;
+				contents[nextPositionId].x = 640;
 				contents[nextPositionId].visible = true;
-				TweenMax.to(contents[currentPositionId],.5,{x:-DeviceProperties.screenWidth, onComplete:function(){contents[currentPositionId].hide();}});
 				TweenMax.to(contents[nextPositionId],.5,{x:0});
+				TweenMax.to(contents[currentPositionId],.5,{x:-640, onComplete:function(){contents[currentPositionId].hide();}});
 			}
 			else {
-				contents[nextPositionId].x = -DeviceProperties.screenWidth;
+				contents[nextPositionId].x = -640;
 				contents[nextPositionId].visible = true;
-				TweenMax.to(contents[currentPositionId],.5,{x:DeviceProperties.screenWidth, onComplete:function(){contents[currentPositionId].hide();}});
+				TweenMax.to(contents[currentPositionId],.5,{x:640, onComplete:function(){contents[currentPositionId].hide();}});
 				TweenMax.to(contents[nextPositionId],.5,{x:0});
 			}
 		}

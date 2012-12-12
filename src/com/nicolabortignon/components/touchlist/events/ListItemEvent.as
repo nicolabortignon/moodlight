@@ -8,9 +8,10 @@
  * */
 package com.nicolabortignon.components.touchlist.events
 {
+	import com.nicolabortignon.components.touchlist.renderers.ITouchListItemRenderer;
+	
 	import flash.display.DisplayObject;
 	import flash.events.Event;
-	import com.thanksmister.touchlist.renderers.ITouchListItemRenderer;
 	
 	public class ListItemEvent extends Event
 	{
