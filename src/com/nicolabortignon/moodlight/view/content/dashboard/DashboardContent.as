@@ -46,6 +46,8 @@ package com.nicolabortignon.moodlight.view.content.dashboard
 			
 			Facade.registerToAnEvent("BACK_FROM_NAME_PAGE",moveBackFromNamePage);
 			Facade.registerToAnEvent("NEXT_FROM_NAME_PAGE",moveNextFromNamePage);
+			
+			
 		}
 		
 		public function addNewSwitchHandler():void{	
@@ -71,7 +73,21 @@ package com.nicolabortignon.moodlight.view.content.dashboard
 		private function moveNextFromColorPage():void{ translateContent(2,3)};
 
 		private function moveBackFromNamePage():void{ translateContent(3,2)};
-		private function moveNextFromNamePage():void{ trace("FINISHED");};
+		private function moveNextFromNamePage():void{ 
+
+			switcher.labelName =  namePage.nameTextField.text;
+			if(namePage.currentSelectedIcon != null)
+				switcher.selectIcon(namePage.currentSelectedIcon.currentFrame);
+			else 
+				switcher.selectIcon(31);
+			
+			translateContent(3,0); 
+			
+			switchPage.addSwitcher(switcher);
+		
+		
+		
+		};
 		
 		
 		public function render():void{

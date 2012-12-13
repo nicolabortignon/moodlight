@@ -14,7 +14,8 @@ package com.nicolabortignon.moodlight.view.page.dashboard.switcher
 		public var labelTextField:TextField;
 		
 		public var lights:Vector.<Boolean>;
-	
+		public var iconSwitch:MovieClip;
+		
 		public function Switcher()
 		{
 			super();
@@ -25,6 +26,11 @@ package com.nicolabortignon.moodlight.view.page.dashboard.switcher
 			removeSwitch.visible = false;
 		}
 		
+		public function selectIcon(i:int):void{
+			iconSwitch.gotoAndStop(i);
+			iconSwitch.backgroundOff.visible = false;
+		    iconSwitch.backgroundOn.visible = false;
+		}
 		public function get labelName():String
 		{
 			return _labelName;

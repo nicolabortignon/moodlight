@@ -128,17 +128,21 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 		private function loadSwitchesInformation():void{
 			switchers = new Vector.<Switcher>();
 			
-			var s1:Switcher = new Switcher();
-			var s2:Switcher = new Switcher();
-			var s3:Switcher = new Switcher();
-			
-			s1.labelName = "Bed Room";
-			s2.labelName = "Living Room Front";
-			s3.labelName = "Living Tv";
-			
+		}
+		public function addSwitcher(s1:Switcher):void{
 			switchers.push(s1);
-			switchers.push(s2);
-			switchers.push(s3);
+			
+			addChild(s1);
+			var length = switchers.length-1;
+			
+			switchers[length].x = 35+200*(length%3);
+			switchers[length].y = 100+ 180*int(length/3);
+			switchers[length].addEventListener(MouseEvent.MOUSE_DOWN, downOnSwitch);
+			switchers[length].id = length;
+			
+			
+			
+
 			
 		}
 		
