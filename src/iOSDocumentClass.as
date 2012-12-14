@@ -27,7 +27,7 @@ package
 		
 		
 		private function init(e:Event) :void {
- 
+ 	
 			 DeviceProperties.retriveValues(this.stage);
 			 
 			 addView();
