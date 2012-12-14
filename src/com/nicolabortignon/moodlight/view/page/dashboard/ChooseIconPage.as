@@ -36,7 +36,7 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 			for(var i:int = 0; i< 30; i++){
 				var icon:MovieClip = new IconImage();
 				icon.x = 100+(110*(i%5));
-				icon.y = 350+80*int(i/5);
+				icon.y = 400+80*int(i/5);
 				icon.gotoAndStop(1+i);
 				icon.backgroundOff.visible = true;
 				icon.backgroundOn.visible = false;
