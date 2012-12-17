@@ -62,8 +62,9 @@ package com.nicolabortignon.moodlight.view.content.dashboard
 			// PARSE LIGHTS
 			
 			switcher.lights = new Vector.<Boolean>(16);
+			trace("NUMERO DI ELEMENT ", chooseLightPage.touchList.elements.length);
 			for(var i:int = 0; i< chooseLightPage.touchList.elements.length;i++){
-				trace((chooseLightPage.touchList.elements[i] as ITouchListItemRenderer).isSelected)
+				trace(i,(chooseLightPage.touchList.elements[i] as ITouchListItemRenderer).isSelected)
 				switcher.lights[i] = (chooseLightPage.touchList.elements[i] as ITouchListItemRenderer).isSelected;
 			}
 			
@@ -75,6 +76,14 @@ package com.nicolabortignon.moodlight.view.content.dashboard
 		private function moveBackFromNamePage():void{ translateContent(3,2)};
 		private function moveNextFromNamePage():void{ 
 
+			var oRGB:Object = Colours.hslToRgb({h:colourPage._currentHue,s:(colourPage._currentSaturation*100),l:(colourPage._currentLuminance*100)});			
+			
+			
+			switcher.r = oRGB.r;
+			switcher.g = oRGB.g;
+			switcher.b = oRGB.b;
+			
+			
 			switcher.labelName =  namePage.nameTextField.text;
 			if(namePage.currentSelectedIcon != null)
 				switcher.selectIcon(namePage.currentSelectedIcon.currentFrame);
@@ -115,7 +124,6 @@ package com.nicolabortignon.moodlight.view.content.dashboard
 			
 		}
 		private function translateContent(currentPositionId:int,nextPositionId:int):void{
-			trace(currentPositionId,nextPositionId);
 			if(currentPositionId < nextPositionId){
 				contents[nextPositionId].x = 640;
 				contents[nextPositionId].visible = true;

@@ -31,7 +31,7 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 			touchList.x = 20;
 			
 			addChild(touchList);
-			for(var i:int = 0; i < 15; i++) {
+			for(var i:int = 0; i < 1; i++) {
 				var item:TouchListItemRenderer = new TouchListItemRenderer();
 				item.index = i;
 				item.data = "Light Number " + String(i+1);

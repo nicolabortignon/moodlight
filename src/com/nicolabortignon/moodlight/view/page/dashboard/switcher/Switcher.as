@@ -1,7 +1,10 @@
 package com.nicolabortignon.moodlight.view.page.dashboard.switcher
 {
+	import com.nicolabortignon.moodlight.controller.SocketConnection;
+	
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
+	import flash.net.Socket;
 	import flash.text.TextField;
 	
 	public class Switcher extends MovieClip
@@ -15,6 +18,9 @@ package com.nicolabortignon.moodlight.view.page.dashboard.switcher
 		
 		public var lights:Vector.<Boolean>;
 		public var iconSwitch:MovieClip;
+		public var r:int;
+		public var g:int;
+		public var b:int;
 		
 		public function Switcher()
 		{
@@ -71,8 +77,12 @@ package com.nicolabortignon.moodlight.view.page.dashboard.switcher
 		public function switchOn():void{
 			if(_isOn){
 				_isOn = false;
+				if(lights[0] == true)
+					SocketConnection.sendColor(0,0,0);
 				this.gotoAndStop(1);
 			} else {
+				if(lights[0] == true)
+					SocketConnection.sendColor(r,g,b);
 				_isOn = true;
 				this.gotoAndStop(2);
 			}

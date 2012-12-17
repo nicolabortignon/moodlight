@@ -108,14 +108,12 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 			}
 		}
 		private function upOnSwitch(e:MouseEvent):void{
-			trace("COUNTER");
 			this.removeEventListener(Event.ENTER_FRAME, count);
 			this.stage.removeEventListener(MouseEvent.MOUSE_UP, upOnSwitch);	
 			(e.target as Switcher).switchOn();
 		}
 		private function count(e:Event):void{
 			_onPushCounter += 1/this.stage.frameRate;
-			trace(_onPushCounter);
 			if(_onPushCounter > keepPushConstant){
 				_currentState = DELETE_SWITCH_STATE;
 				this.removeEventListener(Event.ENTER_FRAME, count);
