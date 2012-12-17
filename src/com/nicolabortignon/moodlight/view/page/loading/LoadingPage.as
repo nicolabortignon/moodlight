@@ -28,7 +28,7 @@ package com.nicolabortignon.moodlight.view.page.loading
 			loadingGlobe.x = (DeviceProperties.screenWidth-loadingGlobe.width)/2;
 			loadingGlobe.y = (DeviceProperties.screenHeight)/2-(250);
 			statusAdvance.x = (DeviceProperties.screenWidth-statusAdvance.width)/2;
-			statusAdvance.y = (DeviceProperties.screenHeight-100);
+			statusAdvance.y = loadingGlobe.y + 170;
 			
 			this.addEventListener(Event.ENTER_FRAME, update);
 		}

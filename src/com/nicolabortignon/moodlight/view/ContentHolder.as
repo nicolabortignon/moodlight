@@ -45,7 +45,7 @@ package com.nicolabortignon.moodlight.view
 			contents = new  Vector.<Content>();
 			contentMenu = new Vector.<CustomButton>();
 			createContents();
-			loadingPage.updatePercentuage(45,"Content Rendered");
+			loadingPage.updatePercentuage(23,"Light Discovery");
 			Facade.dispatchAnEvent("LoadedComplete");
 			// MESSAGE THE CONTENT LOADER WAS INITIALIZED CORRECTLY 
 		}

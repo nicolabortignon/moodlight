@@ -5,6 +5,7 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 	import com.nicolabortignon.colourlib.Colours;
 	import com.nicolabortignon.moodlight.Facade;
 	import com.nicolabortignon.moodlight.controller.DeviceProperties;
+	import com.nicolabortignon.moodlight.controller.SocketConnection;
 	import com.nicolabortignon.moodlight.view.page.Page;
 	
 	import fl.motion.Color;
@@ -140,11 +141,11 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 				}
 				recentColor1.angle = _angle;
 				recentColor1.coordinates = _coordinates;
-
 				trace(_currentHue,_currentSaturation,_currentLuminance);
 				var oRGB:Object = Colours.hslToRgb({h:_currentHue,s:(_currentSaturation*100),l:(_currentLuminance*100)});
 			
 				recentColor1.drawCircle(Colours.getHex(oRGB.r,oRGB.g,oRGB.b));
+				SocketConnection.sendColor(oRGB.r,oRGB.g,oRGB.b);
 				
 			
 		}
@@ -227,6 +228,9 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 			if(_currentSaturation > 1) _currentSaturation = 1;
 			_currentLuminance = e.target.mouseY/300;
 			
+			var oRGB:Object = Colours.hslToRgb({h:_currentHue,s:(_currentSaturation*100),l:(_currentLuminance*100)});			
+			SocketConnection.sendColor(oRGB.r,oRGB.g,oRGB.b);
+			
 			TweenMax.to(triangle.picker, .5, {colorMatrixFilter:{saturation:(e.target.mouseX/255),brightness:0+(e.target.mouseY/100)}});
 		}
 		private function nextButtonHandler(e:MouseEvent):void{
@@ -273,6 +277,8 @@ package com.nicolabortignon.moodlight.view.page.dashboard
 			// rotation should be in the range of 0 - 360 ! 
 			_angle = rotationAngle-18;
 			_currentHue = hueAngle;
+			var oRGB:Object = Colours.hslToRgb({h:_currentHue,s:(_currentSaturation*100),l:(_currentLuminance*100)});			
+			SocketConnection.sendColor(oRGB.r,oRGB.g,oRGB.b);
 			
 			TweenMax.to(triangle.picker, .5,{shortRotation:{rotationZ:rotationAngle}});
 			TweenMax.to(triangle, .5, {shortRotation:{rotationZ:-rotationAngle},colorMatrixFilter:{hue:hueAngle}});

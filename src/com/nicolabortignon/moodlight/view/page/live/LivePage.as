@@ -5,6 +5,7 @@ package com.nicolabortignon.moodlight.view.page.live
 	import com.nicolabortignon.colourlib.Colours;
 	import com.nicolabortignon.moodlight.Facade;
 	import com.nicolabortignon.moodlight.controller.DeviceProperties;
+	import com.nicolabortignon.moodlight.controller.SocketConnection;
 	import com.nicolabortignon.moodlight.view.page.Page;
 	import com.nicolabortignon.moodlight.view.page.dashboard.HueColorMatrixFilter;
 	
@@ -16,6 +17,7 @@ package com.nicolabortignon.moodlight.view.page.live
 	import flash.events.MouseEvent;
 	import flash.filters.ColorMatrixFilter;
 	import flash.geom.Point;
+	import flash.net.Socket;
 	import flash.ui.Mouse;
 	
 	
@@ -125,6 +127,7 @@ package com.nicolabortignon.moodlight.view.page.live
 			_currentLuminance = o.l/100;
 			_currentSaturation = o.s/100;
 			trace(o.h,o.l,o.s);
+			SocketConnection.sendColor(233,167,061);
 			gotoColor(-150,new Point(45,265));
 			
 		}
@@ -133,7 +136,7 @@ package com.nicolabortignon.moodlight.view.page.live
 			_currentHue = o.h;
 			_currentLuminance = o.l/100;
 			_currentSaturation = o.s/100;
-			
+			SocketConnection.sendColor(255,255,255);
 			gotoColor(168,new Point(8,288));
 		}
 		private function coldLightHandler(e:MouseEvent):void{
@@ -141,7 +144,9 @@ package com.nicolabortignon.moodlight.view.page.live
 			_currentHue = o.h;
 			_currentLuminance = o.l/100;
 			_currentSaturation = o.s/100;
+			SocketConnection.sendColor(121,185,223);
 			gotoColor(72,new Point(39,268));
+			
 		}
 		
 		private function gotoColor(angle:int, pickerPosition:Point):void{
@@ -151,6 +156,9 @@ package com.nicolabortignon.moodlight.view.page.live
 			_coordinates = new Point(pickerPosition.x,pickerPosition.y);
 			
 			TweenMax.to(triangle.picker, .5, {colorMatrixFilter:{saturation:(pickerPosition.x/255),brightness:0+(pickerPosition.y/100)}});
+			_currentSaturation = (pickerPosition.x/255);
+			_currentLuminance = (pickerPosition.y/100);
+			
 			
 			var rotationAngle:int = angle;
 			var angleInDegrees:int = -angle;
@@ -171,9 +179,13 @@ package com.nicolabortignon.moodlight.view.page.live
 			
 			wheelCursor.x = (centralPoint.x-19) + distanceFromCenter*Math.cos(angleInRadians);
 			wheelCursor.y = (centralPoint.y+9)+ distanceFromCenter*Math.sin(angleInRadians);
-			
+
+
 			
 			_angle = angle; 
+			
+			
+		
 			TweenMax.to(triangle.picker, .5,{shortRotation:{rotationZ:angle+15}});
 			TweenMax.to(triangle, .5, {shortRotation:{rotationZ:-angle-15},colorMatrixFilter:{hue:hueAngle}});
 		}
@@ -187,6 +199,13 @@ package com.nicolabortignon.moodlight.view.page.live
 			_currentSaturation = e.target.mouseX/255;
 			if(_currentSaturation > 1) _currentSaturation = 1;
 			_currentLuminance = e.target.mouseY/300;
+			
+			var o:Object = new Object();
+			o.h = _currentHue;
+			o.s = _currentSaturation*100;
+			o.l = _currentLuminance*100;
+			var hexColor = Colours.hslToRgb(o);
+			SocketConnection.sendColor(hexColor.r,hexColor.g,hexColor.b);
 			
 			TweenMax.to(triangle.picker, .5, {colorMatrixFilter:{saturation:(e.target.mouseX/255),brightness:0+(e.target.mouseY/100)}});
 		}
@@ -235,6 +254,12 @@ package com.nicolabortignon.moodlight.view.page.live
 			_angle = rotationAngle-18;
 			_currentHue = hueAngle;
 			
+			var o:Object = new Object();
+			o.h = _currentHue;
+			o.s = _currentSaturation*100;
+			o.l = _currentLuminance*100;
+			var hexColor = Colours.hslToRgb(o);
+			SocketConnection.sendColor(hexColor.r,hexColor.g,hexColor.b);
 			TweenMax.to(triangle.picker, .5,{shortRotation:{rotationZ:rotationAngle}});
 			TweenMax.to(triangle, .5, {shortRotation:{rotationZ:-rotationAngle},colorMatrixFilter:{hue:hueAngle}});
 			// angle in 0 - 280

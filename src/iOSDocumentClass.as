@@ -2,6 +2,7 @@ package
 {
 	import com.nicolabortignon.moodlight.Facade;
 	import com.nicolabortignon.moodlight.controller.DeviceProperties;
+	import com.nicolabortignon.moodlight.controller.SocketConnection;
 	import com.nicolabortignon.moodlight.view.ContentHolder;
 	
 	import flash.display.MovieClip;
@@ -23,6 +24,7 @@ package
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.align = StageAlign.TOP_LEFT;
 			this.addEventListener(Event.ADDED_TO_STAGE, init);			
+			SocketConnection.getInstance();
 		}
 		
 		
@@ -36,8 +38,8 @@ package
 		
 		private function addView():void{
 	//		DeviceProperties.screenWidth = 768;
-		//	DeviceProperties.screenWidth = 480;//480;
-		//	DeviceProperties.screenHeight = 838;
+			DeviceProperties.screenWidth = 320;//480;
+			DeviceProperties.screenHeight = 480;
 			var defaultRatio:Number = 960/640;
 			var currentDeviceRatio:Number = DeviceProperties.screenHeight/DeviceProperties.screenWidth;
 			// the ratio between the developed ratio and the device ratio
